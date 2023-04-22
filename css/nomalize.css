@@ -319,6 +319,16 @@ textarea {
  * Add the correct display in Edge, IE 10+, and Firefox.
  */
 
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+
+ul, ol, li {
+    list-style: none;
+}
+
 details {
   display: block;
 }
