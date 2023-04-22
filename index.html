@@ -13,22 +13,29 @@
 
     <body>
 
-        <div class="container">
-            <h1>Simple Memo</h1>
+        <div class="layout">
+            <div class="container">
+                <h1>Simple Memo</h1>
+                <div class="memo">
 
-            <!-- 메모의 제목인풋 -->
-            <input type="text" id="memo-title" placeholder="제목입력">
+                    <!-- 메모의 제목인풋 -->
+                    <input type="text" maxlength="15" id="memo-title" placeholder="제목입력 (15자이내)">
 
-            <textarea name="" id="memo-content" cols="30" rows="10" placeholder="내용입력"></textarea>
+                    <textarea name="" style="resize: none;" id="memo-content" cols="30" rows="10"
+                        placeholder="내용입력"></textarea>
 
-            <button type="button" id="add-btn">메모 등록</button>
+                    <div class="btn-group">
+                        <button type="button" id="add-btn">메모 등록</button>
 
-            <button type="button" id="reset-btn">메모 초기화</button>
+                        <button type="button" id="reset-btn">메모 초기화</button>
+                    </div>
 
+                </div>
+            </div>
 
-        </div>
-        <div class="content">
-            <ul id="display"></ul>
+            <div class="content">
+                <ul id="display"></ul>
+            </div>
         </div>
 
         <script>
