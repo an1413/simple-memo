@@ -25,9 +25,11 @@
 
             <button type="button" id="reset-btn">메모 초기화</button>
 
+
+        </div>
+        <div class="content">
             <ul id="display"></ul>
         </div>
-
 
         <script>
             // const title = document.querySelector('#memo-title').value;
@@ -48,24 +50,26 @@
                 render();
             }
 
-            function saveNote() {
+            function saveNote(event) {
                 const title = document.querySelector('#memo-title').value;
                 const content = document.querySelector('#memo-content').value;
                 allMemo.push({ title, content, len: allMemo.length }); // allMemo에 저장
 
                 localStorage.setItem("allMemo", JSON.stringify(allMemo));
-                // input.value = '';
                 render();
+                event.preventDefault()
+                title = '';
+                content = '';
             }
+
+            // function handleSubmit(event) {
+            //     event.preventDefault();
+            //     title.value();
+            // }
 
             function render() {  // 랜더 함수 
                 const display = document.querySelector("#display");  // 보여주는 컨텐츠박스
                 display.innerHTML = "";  //innerHTML 초기화
-
-                // // 최신 게시물이 위로 올라오도록
-                // for (let i = allMemo.length; i > 0 ; i--) {
-                //     // 아래와 유사 코드
-                // }
 
                 for (const item of allMemo) {   // allMemo의 of니까 value값 돌겠다.
                     const li = document.createElement('li'); // li 태그 생성
@@ -83,10 +87,12 @@
                     deleteMemoBtn.setAttribute("onclick", "remove()"); // onclick 하면 삭제할것임
 
                     // display.appendChild(saveId); // display에 자식요소로 추가
-                    display.appendChild(saveTitle);
-                    display.appendChild(saveContent);
-                    display.appendChild(deleteMemoBtn);
-                    display.appendChild(li);
+                    // li.appendChild
+                    const newli = display.appendChild(li);
+                    newli.appendChild(saveTitle);
+                    newli.appendChild(saveContent);
+                    newli.appendChild(deleteMemoBtn);
+                    // display.appendChild(li);
                 }
             }
 

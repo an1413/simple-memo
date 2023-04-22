@@ -7,3 +7,21 @@
     justify-content: center;
     text-align: center;
 }
+
+.content {
+    padding: 2em;
+}
+
+#display {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+#display li {
+    display: flex;
+    flex-direction: column;
+    max-width: 10em;
+    gap: 20px;
+}
+
