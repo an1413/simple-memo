@@ -7,6 +7,15 @@ button {
     border : none;
 }
 
+/* effect */
+button:hover {
+    background-color :antiquewhite;
+    cursor: pointer;
+}
+
+
+/* layout */
+
 body {
     background-color: aliceblue;
 }
