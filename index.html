@@ -39,8 +39,6 @@
         </div>
 
         <script>
-            // const title = document.querySelector('#memo-title').value;
-            // const content = document.querySelector('#memo-content').value;
             let allMemo = JSON.parse(localStorage.getItem("allMemo")); // Memo 저장하는 빈 배열객체
             allMemo = allMemo ?? [];
 
@@ -49,6 +47,9 @@
             const title = document.querySelector('#memo-title').value;
             const content = document.querySelector('#memo-content').value;
 
+            const input = document.querySelector('input');
+            const textarea = document.querySelector('textarea');
+
             const addBtn = document.querySelector('#add-btn');
             addBtn.addEventListener('click', saveNote);  // addBtn 클릭시 Memo 저장
 
@@ -56,6 +57,9 @@
             resetBtn.addEventListener('click', resetMemo)  // resetBtn 클릭시 Memo 전체 초기화
 
             render();
+
+            input.value = '';
+            textarea = '';
 
             function resetMemo() {  // 초기화 함수
                 const resetBtn = document.querySelector('#reset-btn');
@@ -103,8 +107,8 @@
                     newli.appendChild(deleteMemoBtn);
                 }
 
-                title = '';
-                content = '';
+                input.value = '';
+                textarea.value = '';
             }
 
             function remove() {  // remove 함수 생성
