@@ -1,3 +1,16 @@
+/* resets */
+input, textarea {
+    border: none;
+}
+
+button {
+    border : none;
+}
+
+body {
+    background-color: aliceblue;
+}
+
 .container {
     width: 400px;
     margin: 0 auto;
