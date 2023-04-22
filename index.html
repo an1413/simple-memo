@@ -21,13 +21,90 @@
 
             <textarea name="" id="memo-content" cols="30" rows="10"></textarea>
 
-            <button type="button">메모 등록</button>
+            <button type="button" id="add-btn">메모 등록</button>
 
-            <button type="button">메모 삭제</button>
+            <button type="button" id="reset-btn">메모 초기화</button>
 
-            <section class="display"></section>
+            <section id="display"></section>
         </div>
 
+
+        <script>
+            // const title = document.querySelector('#memo-title').value;
+            // const content = document.querySelector('#memo-content').value;
+            let allMemo = JSON.parse(localStorage.getItem("allMemo")); // Memo 저장하는 빈 배열객체
+            allMemo = allMemo ?? [];
+            render();
+
+            const addBtn = document.querySelector('#add-btn');
+            addBtn.addEventListener('click', saveNote);  // addBtn 클릭시 Memo 저장
+
+            const resetBtn = document.querySelector('#reset-btn');
+            resetBtn.addEventListener('click', resetMemo)  // resetBtn 클릭시 Memo 전체 초기화
+
+            function resetMemo() {  // 초기화 함수
+                const resetBtn = document.querySelector('#reset-btn');
+                allMemo = window.localStorage.clear();
+                render();
+            }
+
+            function saveNote() {
+                const title = document.querySelector('#memo-title').value;
+                const content = document.querySelector('#memo-content').value;
+
+                allMemo.push({ title, content, len: allMemo.length }); // allMemo에 저장
+
+                localStorage.setItem("allMemo", JSON.stringify(allMemo));
+                render();
+            }
+
+            function render() {  // 랜더 함수 
+                const display = document.querySelector("#display");  // 보여주는 컨텐츠박스
+                display.innerHTML = "";  //innerHTML 초기화
+
+                // // 최신 게시물이 위로 올라오도록
+                // for (let i = allMemo.length; i > 0 ; i--) {
+                //     // 아래와 유사 코드
+                // }
+
+                for (const item of allMemo) {   // allMemo의 of니까 value값 돌겠다.
+                    const saveTitle = document.createElement("h2"); // h2생성후 = saveTitle (제목값 저장)
+                    const saveContent = document.createElement("p"); // p생성후 = saveContent (컨텐츠 저장)
+                    const saveId = document.createElement("p"); // p 생성 후 = saveId (Id값 저장)
+                    const deleteMemoBtn = document.createElement("button"); // button 생성 후 = deleteMemoBtn (삭제버튼 생성)
+
+                    // 순회 돌면서 인덱스의 벨류값 저장
+                    saveTitle.textContent = item.title;
+                    saveContent.textContent = item.content;
+                    saveId.textContent = item.len + 1; // +1을 해주는이유는 뭘까?
+                    deleteMemoBtn.textContent = "삭제"; // deleteMemoBtn 만들기 
+                    deleteMemoBtn.setAttribute("id", item.len); // 속성 할당해주기
+                    deleteMemoBtn.setAttribute("onclick", "remove()"); // onclick 하면 삭제할것임
+
+                    display.appendChild(saveId); // display에 자식요소로 추가
+                    display.appendChild(saveTitle);
+                    display.appendChild(saveContent);
+                    display.appendChild(deleteMemoBtn);
+                }
+            }
+
+            function remove() {  // remove 함수 생성
+                // console.log(event.srcElement.id);
+                // console.log(allMemo);
+                const idx = allMemo.find(  // 
+                    (item) => item.len == event.srcElement.id
+                );
+                if (idx) {
+                    allMemo.splice(
+                        allMemo.findIndex((item) => item.len == idx.len),
+                        1
+                    );
+                }
+                localStorage.setItem("allMemo", JSON.stringify(allMemo));
+                render();
+            }
+
+        </script>
     </body>
 
 </html>
