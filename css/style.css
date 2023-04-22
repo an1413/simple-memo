@@ -1,6 +1,8 @@
 /* resets */
 input, textarea {
     border: none;
+    background-color: #ffdb0f;
+    border-bottom: 1px solid #8f8e88;
 }
 
 button {
@@ -13,16 +15,14 @@ button:hover {
     cursor: pointer;
 }
 
-
 /* layout */
-
 body {
     background-color: aliceblue;
 }
 
 .layout {
     display: flex;
-    margin: 3em;
+    margin: 0 3em;
 }
 
 .container {
@@ -64,6 +64,10 @@ button {
 
 .content {
     padding: 2em;
+    margin-left: 3em;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
 }
 
 #display {
@@ -73,9 +77,12 @@ button {
 }
 
 #display li {
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    max-width: 10em;
+    justify-content: space-between;
+    max-width: 280px;
     gap: 20px;
+    background-color: #ffdb0f;
+    border-radius: 0.5em;
 }
-

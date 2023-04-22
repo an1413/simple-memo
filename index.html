@@ -21,7 +21,7 @@
                     <!-- 메모의 제목인풋 -->
                     <input type="text" maxlength="15" id="memo-title" placeholder="제목입력 (15자이내)">
 
-                    <textarea name="" style="resize: none;" id="memo-content" cols="30" rows="10"
+                    <textarea name="" maxlength="150" style="resize: none;" id="memo-content" cols="30" rows="10"
                         placeholder="내용입력"></textarea>
 
                     <div class="btn-group">
@@ -43,7 +43,11 @@
             // const content = document.querySelector('#memo-content').value;
             let allMemo = JSON.parse(localStorage.getItem("allMemo")); // Memo 저장하는 빈 배열객체
             allMemo = allMemo ?? [];
-            render();
+
+            // 초기화버튼 클릭시 메모등록 안되는 것 해결 ul, title, content 값을 바깥에서 선언 후 reset함수에 ul, allMemo 초기화 함.
+            const ul = document.querySelector('ul');
+            const title = document.querySelector('#memo-title').value;
+            const content = document.querySelector('#memo-content').value;
 
             const addBtn = document.querySelector('#add-btn');
             addBtn.addEventListener('click', saveNote);  // addBtn 클릭시 Memo 저장
@@ -51,9 +55,13 @@
             const resetBtn = document.querySelector('#reset-btn');
             resetBtn.addEventListener('click', resetMemo)  // resetBtn 클릭시 Memo 전체 초기화
 
+            render();
+
             function resetMemo() {  // 초기화 함수
                 const resetBtn = document.querySelector('#reset-btn');
-                allMemo = window.localStorage.clear();
+                window.localStorage.clear();
+                ul.innerHTML = '';
+                allMemo = [];
                 render();
             }
 
@@ -64,17 +72,11 @@
 
                 localStorage.setItem("allMemo", JSON.stringify(allMemo));
                 render();
-                event.preventDefault()
-                title = '';
-                content = '';
             }
 
-            // function handleSubmit(event) {
-            //     event.preventDefault();
-            //     title.value();
-            // }
-
             function render() {  // 랜더 함수 
+                const title = document.querySelector('#memo-title').value;
+                const content = document.querySelector('#memo-content').value;
                 const display = document.querySelector("#display");  // 보여주는 컨텐츠박스
                 display.innerHTML = "";  //innerHTML 초기화
 
@@ -99,8 +101,10 @@
                     newli.appendChild(saveTitle);
                     newli.appendChild(saveContent);
                     newli.appendChild(deleteMemoBtn);
-                    // display.appendChild(li);
                 }
+
+                title = '';
+                content = '';
             }
 
             function remove() {  // remove 함수 생성
