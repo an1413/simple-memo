@@ -9,125 +9,57 @@
         <link rel="stylesheet" href="./css/nomalize.css">
         <link rel="stylesheet" href="./css/font.css">
         <link rel="stylesheet" href="./css/style.css">
+        <!-- <link rel="stylesheet" href="./localStorage.js"> -->
     </head>
 
     <body>
 
-        <div class="layout">
-            <div class="container">
-                <h1>Simple Memo</h1>
-                <div class="memo">
+        <div class="wrapper">
+            <div class="layout">
+                <header class="container">
+                    <h1 class="page-title">Simple Memo <img src="./assets/nastar-icon.png" alt="nastar-icon"></h1>
 
-                    <!-- 메모의 제목인풋 -->
-                    <input type="text" maxlength="15" id="memo-title" placeholder="제목입력 (15자이내)">
 
-                    <textarea name="" maxlength="150" style="resize: none;" id="memo-content" cols="30" rows="10"
-                        placeholder="내용입력"></textarea>
+                    <div class="memo">
 
-                    <div class="btn-group">
-                        <button type="button" id="add-btn">메모 등록</button>
+                        <!-- 메모의 제목인풋 -->
+                        <input type="text" maxlength="15" id="memo-title" placeholder="제목입력 (15자이내)">
 
-                        <button type="button" id="reset-btn">메모 초기화</button>
+                        <textarea name="" maxlength="150" style="resize: none;" id="memo-content" cols="30" rows="10"
+                            placeholder="내용입력"></textarea>
+
+                        <div class="btn-group">
+                            <button type="button" id="add-btn">메모 등록</button>
+                            <button type="button" id="reset-btn">메모 초기화</button>
+                        </div>
+
                     </div>
+                </header>
 
-                </div>
-            </div>
-
-            <div class="content">
-                <ul id="display"></ul>
+                <section class="content">
+                    <ul id="display">
+                        <!-- <li class="memo-list">
+                            <h3>메모제목</h3>
+                            <p>메모내용</p>
+                            <div>
+                                <button>수정버튼</button>
+                                <button>삭제버튼</button>
+                            </div>
+                        </li> -->
+                        <!-- <li>
+                            <h2>ㅇㄻㄴ</h2>
+                            <p>ㅁㅇㄹㄴ</p>
+                            <div>
+                                <button id="0" onclick="colorChange()">color</button>
+                                <button id="0" onclick="remove()">삭제</button>
+                            </div>
+                        </li> -->
+                    </ul>
+                </section>
             </div>
         </div>
 
-        <script>
-            let allMemo = JSON.parse(localStorage.getItem("allMemo")); // Memo 저장하는 빈 배열객체
-            allMemo = allMemo ?? [];
-
-            // 초기화버튼 클릭시 메모등록 안되는 것 해결 ul, title, content 값을 바깥에서 선언 후 reset함수에 ul, allMemo 초기화 함.
-            const ul = document.querySelector('ul');
-            const title = document.querySelector('#memo-title').value;
-            const content = document.querySelector('#memo-content').value;
-
-            const input = document.querySelector('input');
-            const textarea = document.querySelector('textarea');
-
-            const addBtn = document.querySelector('#add-btn');
-            addBtn.addEventListener('click', saveNote);  // addBtn 클릭시 Memo 저장
-
-            const resetBtn = document.querySelector('#reset-btn');
-            resetBtn.addEventListener('click', resetMemo)  // resetBtn 클릭시 Memo 전체 초기화
-
-            render();
-
-            input.value = '';
-            textarea = '';
-
-            function resetMemo() {  // 초기화 함수
-                const resetBtn = document.querySelector('#reset-btn');
-                window.localStorage.clear();
-                ul.innerHTML = '';
-                allMemo = [];
-                render();
-            }
-
-            function saveNote(event) {
-                const title = document.querySelector('#memo-title').value;
-                const content = document.querySelector('#memo-content').value;
-                allMemo.push({ title, content, len: allMemo.length }); // allMemo에 저장
-
-                localStorage.setItem("allMemo", JSON.stringify(allMemo));
-                render();
-            }
-
-            function render() {  // 랜더 함수 
-                const title = document.querySelector('#memo-title').value;
-                const content = document.querySelector('#memo-content').value;
-                const display = document.querySelector("#display");  // 보여주는 컨텐츠박스
-                display.innerHTML = "";  //innerHTML 초기화
-
-                for (const item of allMemo) {   // allMemo의 of니까 value값 돌겠다.
-                    const li = document.createElement('li'); // li 태그 생성
-                    const saveTitle = document.createElement("h2"); // h2생성후 = saveTitle (제목값 저장)
-                    const saveContent = document.createElement("p"); // p생성후 = saveContent (컨텐츠 저장)
-                    const saveId = document.createElement("p"); // p 생성 후 = saveId (Id값 저장)
-                    const deleteMemoBtn = document.createElement("button"); // button 생성 후 = deleteMemoBtn (삭제버튼 생성)
-
-                    // 순회 돌면서 인덱스의 벨류값 저장
-                    saveTitle.textContent = item.title;
-                    saveContent.textContent = item.content;
-                    saveId.textContent = item.len + 1; // +1을 해주는이유는 뭘까?
-                    deleteMemoBtn.textContent = "삭제"; // deleteMemoBtn 만들기 
-                    deleteMemoBtn.setAttribute("id", item.len); // 속성 할당해주기
-                    deleteMemoBtn.setAttribute("onclick", "remove()"); // onclick 하면 삭제할것임
-
-                    // display.appendChild(saveId); // display에 자식요소로 추가
-                    // li.appendChild
-                    const newli = display.appendChild(li);
-                    newli.appendChild(saveTitle);
-                    newli.appendChild(saveContent);
-                    newli.appendChild(deleteMemoBtn);
-                }
-
-                input.value = '';
-                textarea.value = '';
-            }
-
-            function remove() {  // remove 함수 생성
-                // console.log(event.srcElement.id);
-                // console.log(allMemo);
-                const idx = allMemo.find(  // 
-                    (item) => item.len == event.srcElement.id
-                );
-                if (idx) {
-                    allMemo.splice(
-                        allMemo.findIndex((item) => item.len == idx.len),
-                        1
-                    );
-                }
-                localStorage.setItem("allMemo", JSON.stringify(allMemo));
-                render();
-            }
-
-        </script>
+        <script type="text/javascript" src="./localStorage.js"></script>
     </body>
 
 </html>
