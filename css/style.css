@@ -1,4 +1,8 @@
 /* resets */
+* {
+  font-family: 'NanumSquareNeo-Variable';
+}
+
 input, textarea {
     border: none;
     background-color: #ffdb0f;
@@ -13,6 +17,15 @@ button {
 button:hover {
     background-color :antiquewhite;
     cursor: pointer;
+}
+
+/* 색상 박스가 선택되었을 때 속성 이거 사용해야함!!!!!!!!!!!!!!! */
+.selected{
+    outline: 2px solid white;
+}
+
+.none {
+  display: none;
 }
 
 /* layout */
@@ -64,11 +77,48 @@ button {
     flex-grow: 1;
 }
 
+/*  ************************* */
+.color-select {
+  width: 20px;
+  margin-left: auto;
+}
+
+.color-list {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.yellow-btn{
+  background-color: #ffdb0f;
+}
+
+.green-btn {
+  background-color: greenyellow;
+}
+
+.pink-btn {
+  background-color: plum;
+}
+
+.purple-btn {
+  background-color: purple;
+}
+
+.grey-btn {
+  background-color: grey;
+}
+
+.yellow {
+  background-color: #ffdb0f;
+}
+
+/* Content */
 
 .content {
     padding: 2em;
+    /* min-width: 100vh; */
     width: 100%;
-    height: 100vw;
     background-color: #fff;
 }
 
@@ -92,12 +142,23 @@ button {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    max-width: 350px;
+    justify-content: space-between;
+    height: 300px;
+    width: 300px;
     gap: 20px;
     background-color: #ffdb0f;
     border-radius: 0.5em;
 }
+
+#display li h2 {
+  font-size: 1.2em;
+}
+
+#display li div {
+  display: flex;
+  flex-direction: column;
+}
+
 
 @media screen and (max-width: 1050px) {
   .note-item {
@@ -126,19 +187,4 @@ button {
     justify-content: center;
   }
 
-}
-
-@media screen and (max-width: 600px) {
-  .modal {
-    width: 330px;
-  }
-}
-
-@media screen and (max-width: 414px) {
-  .note-item {
-    flex-basis: 100%;
-  }
-  .modal {
-    width: 280px;
-  }
 }
