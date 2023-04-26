@@ -1,4 +1,15 @@
 /* resets */
+* {
+  font-size: 14px;
+  font-family: 'NanumSquareNeo-Variable';
+  box-sizing: border-box;
+}
+
+p {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
 input, textarea {
     border: none;
     background-color: #ffdb0f;
@@ -10,9 +21,31 @@ button {
 }
 
 /* effect */
+button {
+  transition: all 0.4s;
+}
+
 button:hover {
-    background-color :antiquewhite;
+    border: inset 2px solid #fff;
+    background-color :#ebd245;
     cursor: pointer;
+}
+
+
+
+input:focus {outline:0.5px solid #fff;}
+
+textarea:focus {
+  outline:2px solid #fff;
+}
+
+/* 색상 박스가 선택되었을 때 속성 이거 사용해야함!!!!!!!!!!!!!!! */
+.selected{
+    outline: 2px solid white;
+}
+
+.none {
+  display: none;
 }
 
 /* layout */
@@ -64,11 +97,56 @@ button {
     flex-grow: 1;
 }
 
+/*  ************************* */
+.color-select {
+  width: 20px;
+  margin-left: auto;
+}
+
+.color-list {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.yellow-btn{
+  background-color: #ffdb0f;
+}
+
+.green-btn {
+  background-color: greenyellow;
+}
+
+.pink-btn {
+  background-color: plum;
+}
+
+.purple-btn {
+  background-color: purple;
+}
+
+.grey-btn {
+  background-color: grey;
+}
+
+.yellow {
+  background-color: #ffdb0f;
+}
+
+.green {
+  background-color: greenyellow;
+}
+
+.pink {
+  background-color: plum;
+}
+
+/* Content */
 
 .content {
     padding: 2em;
+    /* min-width: 100vh; */
     width: 100%;
-    height: 100vw;
     background-color: #fff;
 }
 
@@ -92,12 +170,23 @@ button {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    max-width: 350px;
+    justify-content: space-between;
+    height: 300px;
+    width: 300px;
     gap: 20px;
     background-color: #ffdb0f;
     border-radius: 0.5em;
 }
+
+#display li h2 {
+  font-size: 1.2em;
+}
+
+#display li div {
+  display: flex;
+  flex-direction: column;
+}
+
 
 @media screen and (max-width: 1050px) {
   .note-item {
@@ -126,19 +215,4 @@ button {
     justify-content: center;
   }
 
-}
-
-@media screen and (max-width: 600px) {
-  .modal {
-    width: 330px;
-  }
-}
-
-@media screen and (max-width: 414px) {
-  .note-item {
-    flex-basis: 100%;
-  }
-  .modal {
-    width: 280px;
-  }
 }
